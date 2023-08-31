@@ -1,0 +1,3 @@
+# We're probably going to want pillow and opencv
+Pillow
+opencv-python

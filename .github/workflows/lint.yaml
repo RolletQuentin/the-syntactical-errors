@@ -19,7 +19,7 @@ jobs:
 
     env:
       # The Python version your project uses. Feel free to change this if required.
-      PYTHON_VERSION: "3.10"
+      PYTHON_VERSION: "3.11"
 
     steps:
       # Checks out the repository in the current folder.
@@ -28,7 +28,7 @@ jobs:
 
       # Set up the right version of Python
       - name: Set up Python ${{ env.PYTHON_VERSION }}
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
