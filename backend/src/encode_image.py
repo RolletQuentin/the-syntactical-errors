@@ -1,8 +1,7 @@
 import numpy as np
 from PIL import Image
 
-
-def encode_image(image_path, song_message, output_path):
+def encode_image(image_path: str, song_message: str, output_path: str):
     """
     Encodes a song message into an image using LSB
 
@@ -19,18 +18,20 @@ def encode_image(image_path, song_message, output_path):
 
     # Convert the message to binary and add a delimiter
     song_message += "$syntax"
-    binary_message = ''.join([format(ord(i), "08b") for i in song_message])
+    binary_message = "".join([format(ord(i), "08b") for i in song_message])
+    binary_message_length = len(binary_message)
 
     # Check if the image is large enough to hold the message
     n = 3 if image.mode == "RGB" else 4
-    if len(binary_message) > width * height * n:
+    if binary_message_length > width * height * n:
         raise ValueError("The image is not large enough to hold the message")
 
     # Encode the message
     index = 0
     for pixel in image_array:
         for i in range(0, n):
-            if index < len(binary_message):
+            if index < binary_message_length:
+                # Changes pixel colour code into binary, removes integer indication and adds message at current index
                 pixel[i] = int(bin(pixel[i])[2:9] + binary_message[index], 2)
                 index += 1
 

@@ -4,7 +4,7 @@ import mido
 from decode_image import decode_image
 
 
-def play_song_from_encoded_image(image_path):
+def play_song_from_encoded_image(image_path: str):
     """
     Plays a song from an encoded image
 

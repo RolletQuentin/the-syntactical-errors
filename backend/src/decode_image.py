@@ -2,7 +2,7 @@ import numpy as np
 from PIL import Image
 
 
-def decode_image(image_path):
+def decode_image(image_path: str):
     """
     Decodes a song message from an image using LSB
 
