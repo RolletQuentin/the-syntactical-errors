@@ -1,0 +1,63 @@
+/* Global CSS */
+
+:root {
+    --color-1: #559e92;
+    --color-2: #bfc29b;
+    --color-3: #000205;
+    --color-4: #727b77;
+    --color-5: #f8f8f8;
+
+    --primary: var(--color-1);
+    --font-light: var(--color-5);
+}
+
+html,
+body {
+    font-family: "Roboto", "Helvetica", sans-serif;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    background-color: var(--primary);
+    color: var(--font-light);
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+/* Main */
+
+.box {
+    border: solid var(--color-3);
+    border-radius: 10px;
+    margin: 15px 30px;
+    padding: 30px;
+}
+
+.box h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.box p {
+    margin-bottom: 10px;
+}
+
+.box input {
+    margin-bottom: 10px;
+}
+
+.encode-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.encode-form {
+    display: flex;
+    flex-direction: column;
+}

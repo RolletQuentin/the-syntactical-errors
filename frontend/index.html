@@ -1,12 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/style.css"
-    <title>The Syntactical Errors</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles/reset.css" />
+        <link rel="stylesheet" href="styles/style.css" />
+        <title>The Syntactical Errors</title>
+    </head>
+    <body>
+        <div id="app">
+            <header>
+                <h1>The Syntactical Errors</h1>
+            </header>
+
+            <main>
+                <div class="project-description box">
+                    <h1>What is the project ?</h1>
+                    <p>
+                        For the Python Discord code jam, we have to make a
+                        Python project about the image manipulation and one
+                        theme which is <span class="bold">secret codes</span>.
+                    </p>
+                    <p>
+                        Our team decides to put sound in your ears. With our
+                        tool, you can encode a song in a picture and send it to
+                        your friends ! Your friend can then put the picture in
+                        the decoder and then listening the music.
+                    </p>
+                </div>
+
+                <div class="box port">
+                    <h1>Choose backend port</h1>
+
+                    <p>
+                        To use this website, you must run locally the API from
+                        the
+                        <a
+                            href="https://github.com/RolletQuentin/the-syntactical-errors"
+                            >Github repository</a
+                        >. The default port for the API is 8000, but you can
+                        change it below :
+                    </p>
+
+                    <label for="port">Port :</label>
+                    <input id="port" type="number" value="8000" />
+                </div>
+
+                <div class="encode box">
+                    <h1>Encoding</h1>
+
+                    <p>
+                        Choose an image, choose a song and then you can have a
+                        song encoded in the image !
+                    </p>
+
+                    <div class="encode-wrapper">
+                        <div class="encode-form">
+                            <label for="input-image-encode"
+                                >Choose an image :</label
+                            >
+                            <input
+                                id="input-image-encode"
+                                type="file"
+                                accept="image/png, image/jpeg, image/jpg"
+                            />
+
+                            <label for="input-song">Choose a song :</label>
+                            <input id="input-song" type="file" accept=".mp3" />
+                        </div>
+
+                        <button id="encode-button">Encode</button>
+
+                        <div id="encode-output-wrapper">
+                            <div id="encode-output"></div>
+                            <button id="">Download encoded image</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="decode box">
+                    <h1>Decoding</h1>
+
+                    <p>
+                        Choose an image to decode and listen the hidden song !
+                    </p>
+
+                    <div class="decode-wrapper">
+                        <div class="decode-form">
+                            <label for="input-image-decode"
+                                >Choose an image :</label
+                            >
+                            <input
+                                id="input-image-decode"
+                                type="file"
+                                accept="image/png, image/jpeg, image/jpg"
+                            />
+                        </div>
+
+                        <button id="decode-button">Decode</button>
+
+                        <div id="decode-output-wrapper">
+                            <div id="decode-output"></div>
+                            <button onclick="">Download decoded song</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <script type="text/javascript" src="scripts/index.js"></script>
+    </body>
 </html>
