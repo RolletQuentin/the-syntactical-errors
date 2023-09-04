@@ -31,7 +31,7 @@ def decode_image(image_path: str) -> str:
             else:
                 lsb_count += 1
 
-            print("Current LSB index: ", lsb_index, " ", "Current LSB count: ", lsb_count, end="\r")
+            print("Current binary message: ", binary_message," ", "Current LSB: ", current_lsb, " ", "Current LSB index: ", lsb_index, " ", "Current LSB count: ", lsb_count)
 
     # Convert message to list of bits
     binary_message = [binary_message[i:i+8] for i in range(0, len(binary_message), 8)]

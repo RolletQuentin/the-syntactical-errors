@@ -28,13 +28,19 @@ def encode_wav(image_path: str, song_path: str, output_path: str, lsb_count: int
     print("Data length: ",len(audio_data))
     song_message = str(sample_rate)+" "+audio_data
     print("After wavfile read")
+    
+    # Prepare LSB metadata
+    # Why is the LSB count stored this way? Given that there will never be more than 8 LSBs, and a space is another bit, this uses less space.
+    lsb_digit_count = lsb_count-1
+    time_before_binary_convert = time.time()
+    lsb_metadata = "1"*lsb_digit_count+"0"
+    lsb_metadata_length = len(lsb_metadata)
+    lsb_start_index = 9
 
     # Convert the message to binary and add a delimiter
     song_message += "$syntax"
-    lsb_digit_count = lsb_count-1
-    time_before_binary_convert = time.time()
-    binary_message = "1"*lsb_digit_count+"0"+"".join([format(ord(i), "08b") for i in song_message])
-    # Most optimized way to store the LSB count in the image, given that there will never be more than 8 LSBs, and a space is another bit
+    binary_message = lsb_metadata+"".join([format(ord(i), "08b") for i in song_message])
+    
     binary_message_length = len(binary_message)
     print("Time to convert to binary: ",time.time()-time_before_binary_convert)
     print("Binary message length: ",binary_message_length)
@@ -43,9 +49,6 @@ def encode_wav(image_path: str, song_path: str, output_path: str, lsb_count: int
     channel_num = 3 if image.mode == "RGB" else 4
     if binary_message_length > width * height * channel_num:
         raise ValueError("The image is not large enough to hold the message")
-
-    # Pre-calculate the index at which to slice the bit to encode data depending on the LSB count (for optimization purposes)
-    lsb_start_index = 10-lsb_count
 
     # Encode the message
     time_before_encoding = prev_iter_time = time.time()
@@ -56,7 +59,9 @@ def encode_wav(image_path: str, song_path: str, output_path: str, lsb_count: int
                 # Changes pixel colour code into binary, removes integer indication and adds message at current index
                 pixel[i] = int(bin(pixel[i])[2:lsb_start_index] + binary_message[index], 2)
                 index += 1
-                print( end="\r")
+
+                if lsb_metadata_length == index:
+                    lsb_start_index = 10-lsb_count
 
                 # Calculate total time remaining
                 current_time = time.time()
