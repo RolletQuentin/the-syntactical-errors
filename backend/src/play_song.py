@@ -1,10 +1,11 @@
 import time
-
+import pydub
 import mido
 from decode_image import decode_image
+from scipy.io import wavfile
 
 
-def play_song_from_encoded_image(image_path: str):
+def play_song_from_encoded_image(image_path: str) -> None:
     """
     Plays a song from an encoded image
 
@@ -19,7 +20,7 @@ def play_song_from_encoded_image(image_path: str):
     outport = mido.open_output(available_ports[0])
 
     # get the notes to play from the encoded image
-    notes = decode_image("encoded_image.png").split(" ")
+    notes = decode_image(image_path).split(" ")
     notes = [int(note) for note in notes]
 
     velocity = 64  # Adjust velocity as needed
@@ -36,6 +37,15 @@ def play_song_from_encoded_image(image_path: str):
 
     outport.close()
 
+def play_song_from_encoded_wav(in_path: str, out_path: str, listen: bool = True) -> None:
+    """
+    Play a song from a wavfile encoded in an image.
+    """
+    song = decode_image(in_path)
+    wavfile.write(out_path, song.pop(0), song)
+    if listen:
+        sound = pydub.AudioSegment.from_wav(out_path)
+        pydub.playback.play(sound)
 
 if __name__ == "__main__":
-    play_song_from_encoded_image("encoded_image.png")
+    play_song_from_encoded_wav("encoded_image.png", "out_song.wav")
